@@ -1166,24 +1166,39 @@
     /* Estilos responsivos para dispositivos móveis */
     @media (max-width: 768px) {
       .action-buttons {
-        bottom: 20px;
-        top: auto;
+        top: 20px; /* Move to top instead of bottom */
         right: 20px;
       }
       
       .zoom-control {
-        top: 70px;
-        padding: 5px 10px;
+        top: 20px;
+        left: 20px; /* Position on left side */
+        width: auto;
+        transform: none; /* Remove center transform */
+        padding: 5px 8px;
       }
       
       .zoom-slider {
-        width: 120px;
+        width: 80px;
+      }
+      
+      .zoom-label {
+        font-size: 12px;
       }
       
       .search-container {
-        top: 120px;
-        width: 90%;
-        max-width: 300px;
+        top: 70px; /* Move down below top controls */
+        left: 20px;
+        right: 20px;
+        transform: none; /* Remove center transform */
+        width: calc(100% - 40px); /* Full width minus margins */
+        max-width: none;
+      }
+      
+      .lock-all-btn {
+        top: 20px;
+        left: auto; /* Remove left position */
+        right: 70px; /* Position to left of menu button */
       }
       
       .event-form, .modal {
@@ -3206,7 +3221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatYear(year) {
         if (!year && year !== 0) return '';
         if (year < 0) return `${-year} A.C.`;
-        if (year === 0) return '0';
+        if (year === 0) return "";
         return `${year} D.C.`;
     }
     
@@ -3493,9 +3508,9 @@ document.addEventListener('DOMContentLoaded', function() {
             periodTitleBox.textContent = eventData.title;
             
             let startYearText = eventData.startYear < 0 ? `${-eventData.startYear} A.C.` : `${eventData.startYear} D.C.`;
-            if (eventData.startYear === 0) startYearText = "0";
+            if (eventData.startYear === 0) startYearText = "";
             let endYearText = eventData.endYear < 0 ? `${-eventData.endYear} A.C.` : `${eventData.endYear} D.C.`;
-            if (eventData.endYear === 0) endYearText = "0";
+            if (eventData.endYear === 0) endYearText = "";
             periodYearsBox.textContent = `${startYearText} até ${endYearText}`;
             
             periodDescBox.textContent = eventData.description || '';
@@ -3633,9 +3648,9 @@ document.addEventListener('DOMContentLoaded', function() {
             content.className = 'event-content';
             
             let birthYearText = eventData.birthYear < 0 ? `${-eventData.birthYear} A.C.` : `${eventData.birthYear} D.C.`;
-            if (eventData.birthYear === 0) birthYearText = "0";
+            if (eventData.birthYear === 0) birthYearText = "";
             let deathYearText = eventData.deathYear < 0 ? `${-eventData.deathYear} A.C.` : `${eventData.deathYear} D.C.`;
-            if (eventData.deathYear === 0) deathYearText = "0";
+            if (eventData.deathYear === 0) deathYearText = "";
 
             // Adicionamos o ícone do cadeado no tooltip, mas somente se o personagem estiver travado
             const lockIconHtml = eventData.lockedPosition ? '<span class="lock-icon">🔒</span>' : '';
@@ -3694,7 +3709,7 @@ document.addEventListener('DOMContentLoaded', function() {
             line.style.height = `${baseHeight}px`;
             
             let yearText = eventData.year < 0 ? `${-eventData.year} A.C.` : `${eventData.year} D.C.`;
-            if (eventData.year === 0) yearText = "0";
+            if (eventData.year === 0) yearText = "";
             line.dataset.year = yearText;
 
             const content = document.createElement('div');
@@ -4266,9 +4281,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const content = selectedEventElement.querySelector('.event-content');
             if (content) {
                 let birthYearText = eventData.birthYear < 0 ? `${-eventData.birthYear} A.C.` : `${eventData.birthYear} D.C.`;
-                if (eventData.birthYear === 0) birthYearText = "0";
+                if (eventData.birthYear === 0) birthYearText = "";
                 let deathYearText = eventData.deathYear < 0 ? `${-eventData.deathYear} A.C.` : `${eventData.deathYear} D.C.`;
-                if (eventData.deathYear === 0) deathYearText = "0";
+                if (eventData.deathYear === 0) deathYearText = "";
                 
                 let age;
                 if (eventData.birthYear < 0 && eventData.deathYear > 0) {
@@ -4525,7 +4540,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const span = document.createElement('span');
             span.style.fontSize = '12px';
             
-            let yearText = year < 0 ? `${-year} A.C.` : (year > 0 ? `${year} D.C.` : '0');
+            let yearText = year < 0 ? `${-year} A.C.` : (year > 0 ? `${year} D.C.` : '');
             span.textContent = yearText;
             
             marker.appendChild(span);
@@ -5297,6 +5312,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 
 
 </body></html>
